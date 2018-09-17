@@ -39,7 +39,7 @@ public class TrelloClient {
                 .queryParam("key", trelloAppKey)
                 .queryParam("token", trelloToken)
                 .queryParam("username", trelloUserName)
-                .queryParam("fields", "id")
+                .queryParam("fields", "name,id")
                 .build().encode().toUri();
         TrelloBoardDto[] boardsResponse = restTemplate.getForObject(url, TrelloBoardDto[].class);
 
