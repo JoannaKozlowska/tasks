@@ -34,12 +34,9 @@ public class SimpleEmailService {
         mailMessage.setTo(mail.getMailTo());
         mailMessage.setSubject(mail.getSubject());
         mailMessage.setText(mail.getMessage());
-        try {
+        if (mail.getMailCC() != null && mail.getMailCC() != "") {
             mailMessage.setCc(mail.getMailCC());
-        } catch (MailException e) {
-            LOGGER.warn("Warning: Empty CC is not allowed.");
         }
-//        if (mail.getMailCC() != null && mail.getMailCC() != "")
         return mailMessage;
     }
 }

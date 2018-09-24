@@ -5,9 +5,11 @@ import org.junit.*;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
+
 
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -56,7 +58,7 @@ public class SimpleEmailServiceTest {
     @Test
     public void shouldNotSendCCEmail() {
             //Given
-            Mail mail = new Mail("test@test.com", "", "Test", "Test Message");
+            Mail mail = new Mail("test@test.com", null, "Test", "Test Message");
             SimpleMailMessage mailMessage = new SimpleMailMessage();
             mailMessage.setTo(mail.getMailTo());
             mailMessage.setCc(mail.getMailCC());
@@ -65,6 +67,6 @@ public class SimpleEmailServiceTest {
             //When
             simpleEmailService.send(mail);
             //Then
-            verify(javaMailSender, times(1)).send(mailMessage);
+            verify(javaMailSender, times(1)).send(Mockito.any(SimpleMailMessage.class));
     }
 }
