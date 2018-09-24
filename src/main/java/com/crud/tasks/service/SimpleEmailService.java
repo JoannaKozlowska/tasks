@@ -9,6 +9,7 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
 
 
 @Service
@@ -30,15 +31,15 @@ public class SimpleEmailService {
     }
     private SimpleMailMessage createMessage(final Mail mail) {
         SimpleMailMessage mailMessage = new SimpleMailMessage();
-            if (mail.getMailCC() != null && mail.getMailCC() != "") {
-                mailMessage.setTo(mail.getMailTo());
-                mailMessage.setCc(mail.getMailCC());
-                mailMessage.setSubject(mail.getSubject());
-                mailMessage.setText(mail.getMessage());
-            } else {
-                LOGGER.warn("Warning: Empty CC is not allowed. E-mail won't be sent");
-               return null;
-            }
+        mailMessage.setTo(mail.getMailTo());
+        mailMessage.setSubject(mail.getSubject());
+        mailMessage.setText(mail.getMessage());
+        try {
+            mailMessage.setCc(mail.getMailCC());
+        } catch (MailException e) {
+            LOGGER.warn("Warning: Empty CC is not allowed.");
+        }
+//        if (mail.getMailCC() != null && mail.getMailCC() != "")
         return mailMessage;
     }
 }

@@ -54,7 +54,7 @@ public class SimpleEmailServiceTest {
         verify(javaMailSender, times(1)).send(mailMessage);
     }
     @Test
-    public void shouldNotSendEmail() {
+    public void shouldNotSendCCEmail() {
             //Given
             Mail mail = new Mail("test@test.com", "", "Test", "Test Message");
             SimpleMailMessage mailMessage = new SimpleMailMessage();
@@ -65,6 +65,6 @@ public class SimpleEmailServiceTest {
             //When
             simpleEmailService.send(mail);
             //Then
-            verify(javaMailSender, times(0)).send(mailMessage);
+            verify(javaMailSender, times(1)).send(mailMessage);
     }
 }
