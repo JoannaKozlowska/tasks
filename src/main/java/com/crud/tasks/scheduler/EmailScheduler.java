@@ -29,13 +29,6 @@ public class EmailScheduler {
     public void sendInformationEmail() {
         long size = taskRepository.count();
         simpleEmailService.send(new Mail(adminConfig.getAdminMail(), "", SUBJECT,
-                (MESSAGE + size + " " + setS())));
-    }
-    private String setS() {
-        if (taskRepository.count() != 1) {
-            return TASK +"s";
-        } else {
-            return TASK;
-        }
+                (MESSAGE + size + " " + ((size != 1) ? (TASK + "s") : (TASK)))));
     }
 }
