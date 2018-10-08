@@ -119,5 +119,8 @@ public class TrelloMapperTestSuite {
         TrelloCardDto cardDto = trelloMapper.mapToCardDto(card);
         //Then
         assertEquals("top", cardDto.getPos());
+        assertEquals("id 2", cardDto.getListId());
+        assertEquals("task", cardDto.getName());
+        assertEquals(card.getDescription(), cardDto.getDescription());
     }
 }

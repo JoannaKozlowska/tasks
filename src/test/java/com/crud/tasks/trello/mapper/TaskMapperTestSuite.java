@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,6 +32,7 @@ public class TaskMapperTestSuite {
         //Then
         assertEquals("to do", task.getTitle());
         assertEquals(taskDto1.getId(), task.getId());
+        assertEquals("in progress", task.getContent());
     }
 
     @Test
@@ -43,6 +45,7 @@ public class TaskMapperTestSuite {
         assertEquals(task.getId(), taskDto.getId());
         assertEquals("planning", taskDto.getContent());
         assertEquals(task.getId(), taskDto.getId());
+        assertEquals((Long)2L, taskDto.getId());
     }
 
     @Test
@@ -61,5 +64,6 @@ public class TaskMapperTestSuite {
         assertEquals(3, taskList.size());
         assertEquals(3, taskDtoList.size());
         assertEquals("task finished", taskDtoList.get(2).getContent());
+        assertEquals(taskList.get(0).getId(), taskDtoList.get(0).getId());
     }
 }
